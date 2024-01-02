@@ -1,0 +1,84 @@
+html {
+    display: flex;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    background-color: #eee;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    background-color: #aaa;
+    width: 27em;
+    height: 40em;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5%;  
+}
+
+.screen {
+    display: flex;
+    background-color: #eee;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 8em;
+    width: 12em;
+    border: 1px solid black;
+    margin: 1em;
+    border-radius: 5%;
+    font-size: 2em;
+    font-weight: 500;
+}
+
+.top-btn {
+    display: flex;
+    justify-content: center;;
+    width: 25em;
+    height: 5em;
+    margin-top: -1em;
+}
+
+button {
+    border-radius: 5%;
+    border: 1px solid black;
+    font-size: 1em;
+    width: 5em;
+    height: 5em;
+    margin: 0.5em;
+}
+
+#clear {
+    background-color: #e99;
+    flex: 1;
+    margin: 0.5em;
+}
+
+#delete {
+    background-color: #aaf;
+    flex: 1;
+    margin: 0.5em;
+}
+
+.main-btn {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5em;
+}
+
+#decimal {
+    font-size: 1em;
+}
+
+#num {
+    margin: 0.5em;
+}
