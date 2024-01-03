@@ -79,6 +79,20 @@ button {
     font-size: 1em;
 }
 
-#num {
+#display {
     margin: 0.5em;
+}
+
+#btm-display {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#top-display {
+    display: flex;
+    color: grey;
+    font-weight: 100;
+    font-size: 0.7em;
+    margin-bottom: 1em;
+    justify-content: flex-end;
 }
