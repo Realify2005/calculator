@@ -56,7 +56,7 @@ button {
 }
 
 #clear {
-    background-color: #e99;
+    background-color: #faa;
     flex: 1;
     margin: 0.5em;
 }
@@ -66,6 +66,31 @@ button {
     flex: 1;
     margin: 0.5em;
 }
+
+button:hover {
+    background-color: #ddd;
+}
+
+button:active {
+    background-color: #ccc;
+}
+
+#clear:hover {
+    background-color: #e99;
+}
+
+#clear:active {
+    background-color: #d88;
+}
+
+#delete:hover {
+    background-color: #99e;
+}
+
+#delete:active {
+    background-color: #88d;
+}
+
 
 .main-btn {
     display: flex;

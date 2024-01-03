@@ -22,7 +22,7 @@ function divide(a, b) {
 function operate(a, op, b) {
     a = parseFloat(a);
     b = parseFloat(b);
-    console.log(`doing ${a} ${op} ${b}`)
+    console.log(`doing ${a} ${op} ${b}`) // For Debug
     switch (op) {
         case "+":
             return add(a, b);
@@ -48,51 +48,49 @@ const equal = document.querySelector("#equal");
 const clear = document.querySelector("#clear");
 const del = document.querySelector("#delete");
 const decimal = document.querySelector("#decimal");
-numbers.forEach(number => {
-    number.addEventListener("click", function() {
-        if (!(number.textContent === "0" && btm_display.textContent === "0")) {
-            if (op) {
-                num2 += number.textContent;
-                btm_display.textContent = num2;
-                if (num2.length === 1) {
-                    top_display.textContent += (" " + num2);
-                }
-                else {
-                    top_display.textContent += number.textContent;
-                }
+
+function numberButton(number) {
+    if (!(number === "0" && btm_display.textContent === "0")) {
+        if (op) {
+            num2 += number;
+            btm_display.textContent = num2;
+            if (num2.length === 1) {
+                top_display.textContent += (" " + num2);
             }
             else {
-                num1 += number.textContent;
-                btm_display.textContent = parseFloat(num1);
+                top_display.textContent += number;
             }
         }
-    })
-})
-
-operators.forEach(operator => {
-    operator.addEventListener("click", function() {
-        if (!num2) {
-            op = operator.textContent;
-            top_display.textContent = parseFloat(num1) + " " + op;
-        }
         else {
-            top_display.textContent = operate(num1, op, num2);
-            btm_display.textContent = top_display.textContent;
-            op = operator.textContent;
-            top_display.textContent +=  " " + op;
-            num1 = top_display.textContent;
-            num2 = '';
+            num1 += number;
+            btm_display.textContent = parseFloat(num1);
         }
-    })
-})
+    }
+}
 
-equal.addEventListener("click", function() {
+function operatorButton(operator) {
+    if (!num2) {
+        op = operator;
+        top_display.textContent = parseFloat(num1) + " " + op;
+    }
+    else {
+        top_display.textContent = operate(num1, op, num2);
+        btm_display.textContent = top_display.textContent;
+        op = operator;
+        top_display.textContent +=  " " + op;
+        num1 = top_display.textContent;
+        num2 = '';
+    }
+    decimalAdded = false;
+}
+
+function equalButton() {
     if (num2) {
         btm_display.textContent = operate(num1, op, num2);
     }
-});
+}
 
-decimal.addEventListener("click", function () {
+function decimalButton() {
     if (!decimalAdded) {
         btm_display.textContent += "."
         decimalAdded = true;
@@ -101,21 +99,21 @@ decimal.addEventListener("click", function () {
         }
         else {
             num2 += ".";
+            top_display.textContent += ".";
         }
     }
-})
+}
 
-/* Top Buttons */
-clear.addEventListener("click", function() {
+function clearButton() {
     top_display.textContent = '';
     btm_display.textContent = 0;
     num1 = '';
     num2 = '';
     op = '';
     decimalAdded = false;
-})
+}
 
-del.addEventListener("click", function() {
+function deleteButton() {
     if (btm_display.textContent.length > 1) {
         if (btm_display.length - 1 === ".") {
             decimalAdded = false;
@@ -132,4 +130,44 @@ del.addEventListener("click", function() {
     else {
         num1 = num1.substring(0, num1.length - 1);
     }
+}
+
+function keyboardButton(e) {
+    if (e.key >= 0 && e.key <= 9) numberButton(e.key);
+    if (e.key === "Backspace") deleteButton();
+    if (e.key === "Escape") clearButton();
+    if (e.key === "Enter" || e.key === "=") equalButton();
+    if (e.key === ".") decimalButton();
+    if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "x" || e.key === "/") operatorButton(e.key)
+}
+
+numbers.forEach(number => {
+    number.addEventListener("click", function() {
+        numberButton(number.textContent);
+    })
 })
+
+operators.forEach(operator => {
+    operator.addEventListener("click", function() {
+        operatorButton(operator.textContent);
+    })
+})
+
+equal.addEventListener("click", function() {
+    equalButton();
+});
+
+decimal.addEventListener("click", function () {
+    decimalButton();
+})
+
+/* Top Buttons */
+clear.addEventListener("click", function() {
+    clearButton();
+})
+
+del.addEventListener("click", function() {
+    deleteButton();
+})
+
+document.addEventListener("keydown", keyboardButton)
